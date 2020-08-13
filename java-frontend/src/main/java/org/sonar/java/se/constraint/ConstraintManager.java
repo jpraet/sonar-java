@@ -22,6 +22,7 @@ package org.sonar.java.se.constraint;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import java.util.Arrays;
 import org.sonar.java.bytecode.cfg.Instruction;
 import org.sonar.java.se.ExplodedGraphWalker;
 import org.sonar.java.se.Pair;
@@ -225,6 +226,10 @@ public class ConstraintManager {
         throw new IllegalStateException("Unexpected kind for binary SV");
     }
     return result;
+  }
+
+  public SymbolicValue createEquality(ProgramState.SymbolicValueSymbol lhs, ProgramState.SymbolicValueSymbol rhs) {
+    return createRelationalSymbolicValue(Kind.EQUAL, Arrays.asList(lhs, rhs));
   }
 
   public SymbolicValue createSymbolicValue(Instruction inst) {
